@@ -6,6 +6,8 @@
 
 package UI;
 
+import Core.GridGame.Observers.GridObserver;
+import Core.TetrisGame.TetrisGrid;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -21,14 +23,22 @@ import javax.swing.border.Border;
  * Frame which is displaying the Tetris Game
  * @author Antoine
  */
-public class MainFrame extends JFrame{
+public class MainFrame extends JFrame implements GridObserver{
+    
+    private JComponent tetrisGrid;
+    private TetrisScoreBoard _scoreBoard;
+
+    public TetrisScoreBoard getScoreBoard() {
+        return _scoreBoard;
+    }
     /**
      * Contruct the Main Frame of the Game
      */
     public MainFrame() {
         super();
-        setSize(300,600);
+        setSize(300,300);
         setResizable(false);
+        _scoreBoard=new TetrisScoreBoard();
         build();
         addWindowListener(new WindowAdapter() {
             @Override
@@ -43,9 +53,9 @@ public class MainFrame extends JFrame{
      * Building the Frame
      */
     public void build(){
-        
+        setLayout(new FlowLayout());
         //adding the components
-        JComponent tetrisGrid=new JPanel(new GridLayout(20,10));
+        tetrisGrid=new JPanel(new GridLayout(TetrisGrid.NB_ROW,TetrisGrid.NB_COL+2));
         //adding the Listeners
         
         //SetParameters
@@ -54,11 +64,25 @@ public class MainFrame extends JFrame{
         
         Border blackline = BorderFactory.createLineBorder(Color.black,1);
         tetrisGrid.setBorder(blackline);
-        for(int i=0;i<200;i++){
+        int nb_box=(TetrisGrid.NB_COL+2)*TetrisGrid.NB_ROW;
+        for(int i=0;i<nb_box;i++){
             JComponent tetrisBox=new Box();
+            tetrisBox.setBorder(blackline);
+            tetrisBox.setBackground(Color.BLACK);
             tetrisGrid.add(tetrisBox);
         }
-        
-        this.add(tetrisGrid);
+        tetrisGrid.setBorder(blackline);
+        this.add(tetrisGrid,FlowLayout.LEFT);
+        this.add(_scoreBoard);
+    }
+
+    @Override
+    public void update(Color[][] tab) {
+        for(int i=0;i<TetrisGrid.NB_ROW;i++){
+            for(int j=0;j<TetrisGrid.NB_COL;j++){
+                tetrisGrid.getComponent((i*(TetrisGrid.NB_COL+2))+j+1).setBackground(tab[i][j]);
+            }
+                
+        }
     }
 }
