@@ -118,6 +118,7 @@ public abstract class Piece {
      * @param _shapes Array of Shapes
      */
     public Piece(Shape[] _shapes) {
+        this();
         this._shapes = _shapes;
     }
 
@@ -128,6 +129,7 @@ public abstract class Piece {
      * @param _color Color of the Piece
      */
     public Piece(Shape[] _shapes, Color _color) {
+        this();
         this._shapes = _shapes;
         this._color = _color;
     }
