@@ -9,7 +9,7 @@ import java.util.Stack;
  * @author Antoine CARON
  * @version 1.0
  */
-public abstract class GridGameCore<E extends Grid> extends Thread {
+public abstract class GridGameCore<E extends Grid> implements Runnable{
     protected E grid;
 
 

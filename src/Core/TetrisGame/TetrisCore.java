@@ -62,7 +62,7 @@ public class TetrisCore extends GridGameCore<TetrisGrid> {
                 grid.spawnPiece();
                 while (pieceFree) {
                     try {
-                        sleep((long) BASIC_TEMPO);
+                        Thread.currentThread().sleep((long) BASIC_TEMPO);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(TetrisCore.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -83,6 +83,11 @@ public class TetrisCore extends GridGameCore<TetrisGrid> {
         this.grid.setCurrentPiece(this.getInfo().getHeldPiece());
         this.getNextPieces().add(createRandomPiece());
         this.getInfo().setHeldPiece(this.getNextPieces().pop());
+    }
+
+    @Override
+    public void run() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
