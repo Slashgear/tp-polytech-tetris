@@ -9,7 +9,9 @@ import java.util.Stack;
  * @author Antoine CARON
  * @version 1.0
  */
-public abstract class GridGameCore extends Thread {
+public abstract class GridGameCore<E extends Grid> extends Thread {
+    protected E grid;
+
 
     /**
      * ArrayList of all the Next Piece 
@@ -69,10 +71,11 @@ public abstract class GridGameCore extends Thread {
      * @param _info
      * @param _tempo 
      */
-    public GridGameCore(GridGameInfo _info, double _tempo) {
+    public GridGameCore(GridGameInfo _info, double _tempo,E grid) {
         this._info=_info;
         this._tempo = _tempo;
         this._nextPieces=new Stack<Piece>();
+        this.grid= grid;
     }
 
 }
