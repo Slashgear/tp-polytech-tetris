@@ -39,10 +39,10 @@ public class TetrisPieceFactory implements PieceFactory {
 
         System.out.println("Ajout du Carré");
         shapes = new TetrisShape[Piece.NB_SHAPE];
-        shapes[0] = new TetrisShape(new int[][]{{0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}});
-        shapes[1] = new TetrisShape(new int[][]{{0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}});
-        shapes[2] = new TetrisShape(new int[][]{{0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}});
-        shapes[3] = new TetrisShape(new int[][]{{0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}});
+        shapes[0] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}});
+        shapes[1] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}});
+        shapes[2] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}});
+        shapes[3] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}});
         possible_pieces.add(new TetrisPiece(shapes,Color.yellow));
         System.out.println(Arrays.toString(shapes));
 
