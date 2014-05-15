@@ -67,12 +67,52 @@ public class Position {
     }
 
     /**
-     * Return the position of the piece after to make it go down of one row.
-     * (The function does not move the piece)
+     * Return the position after making it to go down of one row.
+     * (Does not move the position)
      *
-     * @return Current position of the piece - 1 in rows
+     * @return Current position + 1 in rows
      */
     public Position getDownPosition() {
-        return new Position(this._x - 1, _y);
+        return new Position(this._x + 1, _y);
+    }
+
+    /**
+     * Return the position after making it to go up of one row.
+     * (Does not move the position)
+     *
+     * @return Current position - 1 in rows
+     */
+    public Position getUpPosition() {
+        return new Position(this._x - 1, this._y);
+    }
+
+    /**
+     * Return the position after making it to go left of one column
+     * (Does not move the position)
+     *
+     * @return Current position - 1 in columns
+     */
+    public Position getLeftPosition() {
+        return new Position(this._x, this._y - 1);
+    }
+
+    /**
+     * Return the position after making it to go right of one column (Does not
+     * modify the position)
+     *
+     * @return Current position + 1 in columns
+     */
+    public Position getRightPosition() {
+        return new Position(this._x, this._y + 1);
+    }
+
+    /**
+     * Return a string of the position
+     *
+     * @return String of the position
+     */
+    @Override
+    public String toString() {
+        return "Position{" + "_x=" + _x + ", _y=" + _y + '}';
     }
 }
