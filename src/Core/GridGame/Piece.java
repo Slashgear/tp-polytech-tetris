@@ -84,6 +84,7 @@ public abstract class Piece {
      * Default Constructor
      */
     public Piece() {
+        _position = new Position();
         _currentRotation = 0;
     }
 
