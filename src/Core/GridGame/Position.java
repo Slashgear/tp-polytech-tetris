@@ -67,8 +67,8 @@ public class Position {
     }
 
     /**
-     * Return the position after making it to go down of one row.
-     * (Does not move the position)
+     * Return the position after making it to go down of one row. (Does not move
+     * the position)
      *
      * @return Current position + 1 in rows
      */
@@ -77,8 +77,8 @@ public class Position {
     }
 
     /**
-     * Return the position after making it to go up of one row.
-     * (Does not move the position)
+     * Return the position after making it to go up of one row. (Does not move
+     * the position)
      *
      * @return Current position - 1 in rows
      */
@@ -87,8 +87,8 @@ public class Position {
     }
 
     /**
-     * Return the position after making it to go left of one column
-     * (Does not move the position)
+     * Return the position after making it to go left of one column (Does not
+     * move the position)
      *
      * @return Current position - 1 in columns
      */
@@ -104,6 +104,34 @@ public class Position {
      */
     public Position getRightPosition() {
         return new Position(this._x, this._y + 1);
+    }
+
+    /**
+     * Set the position at the down position (row + 1)
+     */
+    public void setDownPosition() {
+        this._x++;
+    }
+
+    /**
+     * Set the position at the up position (row - 1)
+     */
+    public void setUpPosition() {
+        this._x--;
+    }
+
+    /**
+     * Set the position at the left position (column - 1)
+     */
+    public void setLeftPosition() {
+        this._y--;
+    }
+
+    /**
+     * Set the position at the right position (column + 1)
+     */
+    public void setRightPosition() {
+        this._y++;
     }
 
     /**
