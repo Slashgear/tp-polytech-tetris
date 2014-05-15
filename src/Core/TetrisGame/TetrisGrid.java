@@ -15,8 +15,6 @@ public class TetrisGrid extends Grid {
     public static final int NB_ROW = 20;
     public static final int NB_COL = 10;
 
-
-    
     public TetrisGrid() {
         super(NB_ROW, NB_COL);
     }
@@ -41,8 +39,8 @@ public class TetrisGrid extends Grid {
                 if (shape.getShape(i, j) != 0
                         && (nextPosition.getX() + i >= NB_ROW
                         || nextPosition.getY() + j >= NB_COL
-                        || nextPosition.getX()+i<0
-                        || nextPosition.getY()+j<0
+                        || nextPosition.getX() + i < 0
+                        || nextPosition.getY() + j < 0
                         || this.get(nextPosition.getX() + i, nextPosition.getY() + j).getColor() != Color.white)) {
                     return false;
                 }
@@ -88,16 +86,34 @@ public class TetrisGrid extends Grid {
             Color[][] tab = super.getColorTab();
             TetrisShape shape = (TetrisShape) getCurrentPiece().getShape(getCurrentPiece().getCurrentRotation());
             Color c = this.getCurrentPiece().getColor();
-            Position p=getCurrentPiece().getPosition();
+            Position p = getCurrentPiece().getPosition();
             for (int i = 0; i < TetrisShape.NB_ROW; i++) {
                 for (int j = 0; j < TetrisShape.NB_COL; j++) {
-                    if (p.getX()+i<TetrisGrid.NB_ROW && p.getY()+j<TetrisGrid.NB_COL &&shape.getShape(i, j) == 1) {
+                    if (p.getX() + i < TetrisGrid.NB_ROW && p.getY() + j < TetrisGrid.NB_COL && shape.getShape(i, j) == 1) {
                         tab[p.getX() + i][p.getY() + j] = c;
                     }
                 }
             }
             return tab;
         }
+    }
+
+    public int destroyLines() {
+        boolean line_complete = true;
+        int nb_lines = 0;
+        for (int i = 0; i < NB_ROW; ++i) {
+            for (int j = 0; j < NB_COL; ++j) {
+                if(this.get(i,j).getColor() == Color.white) {
+                    line_complete = false;
+                }
+            }
+            if(line_complete) {
+                nb_lines++;
+                //Faire fonction de suppression et de décalage de blocks
+                line_complete = true;
+            }
+        }
+        return nb_lines;
     }
 
 }
