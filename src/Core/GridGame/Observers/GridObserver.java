@@ -1,18 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package Core.GridGame.Observers;
 
 import java.awt.Color;
 
 /**
- *
+ * Observer of the Grid, it allow to trhow information about the Grid Modele to the View
  * @author Antoine
  */
 public interface GridObserver {
+    /**
+     * Update the View of the Grid
+     * @param tab The color Tab corresponding to the Grid
+     */
    public void update(Color[][] tab);
    
 }
