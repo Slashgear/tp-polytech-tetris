@@ -39,9 +39,11 @@ public class TetrisGrid extends Grid {
         for (int i = 0; i < TetrisShape.NB_ROW; i++) {
             for (int j = 0; j < TetrisShape.NB_COL; j++) {
                 if (shape.getShape(i, j) != 0
-                        && nextPosition.getX() + i >= NB_ROW
-                        && nextPosition.getY() + j >= NB_COL
-                        && this.get(nextPosition.getX() + i, nextPosition.getY() + j).getColor() != Color.white) {
+                        && (nextPosition.getX() + i >= NB_ROW
+                        || nextPosition.getY() + j >= NB_COL
+                        || nextPosition.getX()+i<0
+                        || nextPosition.getY()+j<0
+                        || this.get(nextPosition.getX() + i, nextPosition.getY() + j).getColor() != Color.white)) {
                     return false;
                 }
             }
@@ -68,10 +70,11 @@ public class TetrisGrid extends Grid {
     public void fixPiece() {
         TetrisShape shape = (TetrisShape) getCurrentPiece().getShape(getCurrentPiece().getCurrentRotation());
         Color c = this.getCurrentPiece().getColor();
+        Position p = getCurrentPiece().getPosition();
         for (int i = 0; i < TetrisShape.NB_ROW; i++) {
             for (int j = 0; j < TetrisShape.NB_COL; j++) {
                 if (shape.getShape(i, j) == 1) {
-                    this.setBlock(i, j, new Block(c));
+                    this.setBlock(p.getX() + i, p.getY() + j, new Block(c));
                 }
             }
         }

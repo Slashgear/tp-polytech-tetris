@@ -140,4 +140,6 @@ public abstract class Piece {
     public void rotatePiece() {
         _currentRotation = (_currentRotation + 1) % _shapes.length;
     }
+    
+    
 }

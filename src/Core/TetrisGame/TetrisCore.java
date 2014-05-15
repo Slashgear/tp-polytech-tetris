@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class TetrisCore extends GridGameCore<TetrisGrid> {
 
     public static final int NB_NEXTPIECE = 3;
-    public static final double BASIC_TEMPO = 0.1f;
+    public static final double BASIC_TEMPO = 250f;
 
     public TetrisGrid getGrid() {
         return grid;
@@ -41,8 +41,8 @@ public class TetrisCore extends GridGameCore<TetrisGrid> {
     }
 
     public boolean isSpawnFree() {
-        for (int i = 3; i < 7; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 3; j < 7; j++) {
                 if (this.grid.getBlocks(i, j).getColor() != Color.white) {
                     return false;
                 }
@@ -62,7 +62,7 @@ public class TetrisCore extends GridGameCore<TetrisGrid> {
                 grid.spawnPiece();
                 while (pieceFree) {
                     try {
-                        sleep(500);
+                        sleep((long) BASIC_TEMPO);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(TetrisCore.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -73,7 +73,8 @@ public class TetrisCore extends GridGameCore<TetrisGrid> {
                     }
                 }
                 this.grid.fixPiece();
-
+                this.nextPiece();
+                pieceFree = true;
             }
         }
     }
