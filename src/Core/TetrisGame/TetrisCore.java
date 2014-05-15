@@ -67,7 +67,10 @@ public class TetrisCore extends GridGameCore<TetrisGrid> {
                         Logger.getLogger(TetrisCore.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     pieceFree = this.grid.isDownable();
-                    this.grid.getCurrentPiece().setPosition(this.grid.getCurrentPiece().getPosition().getDownPosition());
+                    if(pieceFree){
+                        this.grid.getCurrentPiece().setPosition(this.grid.getCurrentPiece().getPosition().getDownPosition());
+                        this.grid.fireUpdatedGrid(grid.getColorTab(true));
+                    }
                 }
                 this.grid.fixPiece();
 

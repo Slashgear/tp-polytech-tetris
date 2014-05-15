@@ -28,7 +28,7 @@ public class TetrisGrid extends Grid {
 
     @Override
     public void spawnPiece() {
-        this.getCurrentPiece().setPosition(3, 0);
+        this.getCurrentPiece().setPosition(0, 3);
         fireUpdatedGrid(getColorTab(true));
     }
 
@@ -85,10 +85,11 @@ public class TetrisGrid extends Grid {
             Color[][] tab = super.getColorTab();
             TetrisShape shape = (TetrisShape) getCurrentPiece().getShape(getCurrentPiece().getCurrentRotation());
             Color c = this.getCurrentPiece().getColor();
+            Position p=getCurrentPiece().getPosition();
             for (int i = 0; i < TetrisShape.NB_ROW; i++) {
                 for (int j = 0; j < TetrisShape.NB_COL; j++) {
-                    if (shape.getShape(i, j) == 1) {
-                        tab[getCurrentPiece().getPosition().getX() + i][getCurrentPiece().getPosition().getY() + j] = c;
+                    if (p.getX()+i<TetrisGrid.NB_ROW && p.getY()+j<TetrisGrid.NB_COL &&shape.getShape(i, j) == 1) {
+                        tab[p.getX() + i][p.getY() + j] = c;
                     }
                 }
             }
