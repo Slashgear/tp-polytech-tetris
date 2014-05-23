@@ -18,7 +18,7 @@ public class TetrisPieceFactory implements PieceFactory {
 
     /**
      * Create the Piece of a classic Tetris Game with all the rotion in
-     * anti-hour sort.
+     * anti-clockwise sort.
      *
      * @return The list of each Tetris Piece with all the possible rotation
      */
@@ -57,10 +57,10 @@ public class TetrisPieceFactory implements PieceFactory {
 
         //System.out.println("Ajout du T");
         shapes = new TetrisShape[Piece.NB_SHAPE];
-        shapes[0] = new TetrisShape(new int[][]{{0, 1, 0, 0}, {0, 1, 1, 0}, {0, 1, 0, 0}, {0, 0, 0, 0}});
-        shapes[1] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 0, 1, 0}, {0, 1, 1, 1}, {0, 0, 0, 0}});
-        shapes[2] = new TetrisShape(new int[][]{{0, 0, 0, 1}, {0, 0, 1, 1}, {0, 0, 0, 1}, {0, 0, 0, 0}});
-        shapes[3] = new TetrisShape(new int[][]{{0, 1, 1, 1}, {0, 0, 1, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}});
+        shapes[0] = new TetrisShape(new int[][]{{0, 0, 1, 0}, {0, 1, 1, 1}, {0, 0, 0, 0}, {0, 0, 0, 0}});
+        shapes[1] = new TetrisShape(new int[][]{{0, 0, 1, 0}, {0, 1, 1, 0}, {0, 0, 1, 0}, {0, 0, 0, 0}});
+        shapes[2] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 1, 1, 1}, {0, 0, 1, 0}, {0, 0, 0, 0}});
+        shapes[3] = new TetrisShape(new int[][]{{0, 0, 1, 0}, {0, 0, 1, 1}, {0, 0, 1, 0}, {0, 0, 0, 0}});
         possible_pieces.add(new TetrisPiece(shapes,Color.magenta));
         //System.out.println(Arrays.toString(shapes));
 

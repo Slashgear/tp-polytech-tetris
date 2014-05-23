@@ -9,11 +9,13 @@ import Core.GridGame.Observers.GridObserver;
 import Core.TetrisGame.TetrisGrid;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
@@ -23,7 +25,7 @@ import javax.swing.border.Border;
  *
  * @author Antoine
  */
-public class MainFrame extends JFrame{
+public class MainFrame extends JFrame {
 
     private Grid _tetrisGrid;
 
@@ -43,11 +45,11 @@ public class MainFrame extends JFrame{
      */
     public MainFrame() {
         super();
-        setSize(300, 300);
+        setSize(800, 600);
         setResizable(false);
         _scoreBoard = new TetrisScoreBoard();
         _menu = new TetrisMenu();
-        _tetrisGrid=new Grid();
+        _tetrisGrid = new Grid();
         build();
 
         addWindowListener(new WindowAdapter() {
@@ -64,18 +66,13 @@ public class MainFrame extends JFrame{
      */
     public void build() {
         setLayout(new BorderLayout(0, 0));
-        JPanel pane = new JPanel();
-        pane.setLayout(new BorderLayout(0, 500));
-        //adding the components
-        //adding the Listeners
 
         //SetParameters
         setTitle("Tetris The Game");
-       
-        pane.add(_tetrisGrid, BorderLayout.WEST);
-        pane.add(_scoreBoard, BorderLayout.EAST);
-        this.add(pane, BorderLayout.CENTER);
+
+        //adding the components
+        this.add(_tetrisGrid, BorderLayout.WEST);
+        this.add(_scoreBoard, BorderLayout.CENTER);
         this.add(_menu, BorderLayout.NORTH);
     }
-
 }
