@@ -6,15 +6,12 @@
 package UI;
 
 import Core.GridGame.Observers.GridObserver;
-import Core.TetrisGame.TetrisCore;
 import Core.TetrisGame.TetrisGrid;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Arrays;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -26,9 +23,13 @@ import javax.swing.border.Border;
  *
  * @author Antoine
  */
-public class MainFrame extends JFrame implements GridObserver {
+public class MainFrame extends JFrame{
 
-    private JComponent tetrisGrid;
+    private Grid _tetrisGrid;
+
+    public Grid getTetrisGrid() {
+        return _tetrisGrid;
+    }
     private TetrisScoreBoard _scoreBoard;
 
     private TetrisMenu _menu;
@@ -46,7 +47,7 @@ public class MainFrame extends JFrame implements GridObserver {
         setResizable(false);
         _scoreBoard = new TetrisScoreBoard();
         _menu = new TetrisMenu();
-
+        _tetrisGrid=new Grid();
         build();
 
         addWindowListener(new WindowAdapter() {
@@ -66,35 +67,15 @@ public class MainFrame extends JFrame implements GridObserver {
         JPanel pane = new JPanel();
         pane.setLayout(new BorderLayout(0, 500));
         //adding the components
-        tetrisGrid = new JPanel(new GridLayout(TetrisGrid.NB_ROW, TetrisGrid.NB_COL + 2));
         //adding the Listeners
 
         //SetParameters
         setTitle("Tetris The Game");
-
-        Border blackline = BorderFactory.createLineBorder(Color.black, 1);
-
-        int nb_box = (TetrisGrid.NB_COL + 2) * TetrisGrid.NB_ROW;
-        for (int i = 0; i < nb_box; i++) {
-            JComponent tetrisBox = new Box();
-            tetrisBox.setBorder(blackline);
-            tetrisBox.setBackground(Color.BLACK);
-            tetrisGrid.add(tetrisBox);
-        }
-
-        pane.add(tetrisGrid, BorderLayout.WEST);
+       
+        pane.add(_tetrisGrid, BorderLayout.WEST);
         pane.add(_scoreBoard, BorderLayout.EAST);
         this.add(pane, BorderLayout.CENTER);
         this.add(_menu, BorderLayout.NORTH);
     }
 
-    @Override
-    public void update(Color[][] tab) {
-        for (int i = 0; i < TetrisGrid.NB_ROW; i++) {
-            for (int j = 0; j < TetrisGrid.NB_COL; j++) {
-                tetrisGrid.getComponent((i * (TetrisGrid.NB_COL + 2)) + j + 1).setBackground(tab[i][j]);
-            }
-
-        }
-    }
 }

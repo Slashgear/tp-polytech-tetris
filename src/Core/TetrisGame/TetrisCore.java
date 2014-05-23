@@ -16,7 +16,7 @@ import javax.swing.Timer;
 public class TetrisCore extends GridGameCore<TetrisGrid> {
 
     public static final int NB_NEXTPIECE = 3;
-    public static final int BASIC_TEMPO = 250;
+    public static final int BASIC_TEMPO = 300;
   
 
 
