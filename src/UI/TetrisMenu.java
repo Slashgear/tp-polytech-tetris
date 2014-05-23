@@ -6,10 +6,21 @@
 
 package UI;
 
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+
 /**
  * MenuBar of the Game
  * @author Antoine
  */
-public class TetrisMenu {
+public class TetrisMenu extends JMenuBar {
+
+    public TetrisMenu() {
+        super();
+        JMenu file= new JMenu("Fichier");
+        JMenu pause= new JMenu("Pause");
+        this.add(file);
+        this.add(pause);
+    }
     
 }

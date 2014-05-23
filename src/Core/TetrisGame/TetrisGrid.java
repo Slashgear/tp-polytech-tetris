@@ -2,9 +2,9 @@ package Core.TetrisGame;
 
 import Core.GridGame.Block;
 import Core.GridGame.Grid;
-import Core.GridGame.Piece;
 import Core.GridGame.Position;
 import java.awt.Color;
+import java.util.ArrayList;
 
 /**
  *
@@ -64,6 +64,14 @@ public class TetrisGrid extends Grid {
         return newPositionValide(getCurrentPiece().getPosition(), getCurrentPiece().getLeftRotation());
     }
 
+    public boolean canMoveRight() {
+        return newPositionValide(getCurrentPiece().getPosition().getRightPosition(), getCurrentPiece().getCurrentRotation());
+    }
+
+    public boolean canMoveLeft() {
+        return newPositionValide(getCurrentPiece().getPosition().getLeftPosition(), getCurrentPiece().getCurrentRotation());
+    }
+
     @Override
     public void fixPiece() {
         TetrisShape shape = (TetrisShape) getCurrentPiece().getShape(getCurrentPiece().getCurrentRotation());
@@ -79,7 +87,7 @@ public class TetrisGrid extends Grid {
         fireUpdatedGrid(this.getColorTab());
     }
 
-    public Color[][] getColorTab(boolean withPiece) {
+    synchronized public Color[][] getColorTab(boolean withPiece) {
         if (!withPiece) {
             return super.getColorTab();
         } else {
@@ -99,21 +107,109 @@ public class TetrisGrid extends Grid {
     }
 
     public int destroyLines() {
-        boolean line_complete = true;
+        ArrayList<Integer> move_for_lines = new ArrayList<Integer>();
+        int nb_move = 0;
         int nb_lines = 0;
-        for (int i = 0; i < NB_ROW; ++i) {
-            for (int j = 0; j < NB_COL; ++j) {
-                if(this.get(i,j).getColor() == Color.white) {
-                    line_complete = false;
+        for (int i = NB_ROW - 1; i >= 0; i--) {
+            if (isLigneComplete(i)) {
+                move_for_lines.add(-1);
+                nb_move++;
+                nb_lines++;
+            } else {
+                if (!isLigneEmpty(i)) {
+                    move_for_lines.add(nb_move);
+                } else {
+                    break;
                 }
             }
-            if(line_complete) {
-                nb_lines++;
-                //Faire fonction de suppression et de décalage de blocks
-                line_complete = true;
-            }
+        }
+        if (nb_lines > 0) {
+            updateGrid(move_for_lines);
         }
         return nb_lines;
     }
 
+    public boolean isLigneComplete(int index) {
+        for (int j = 0; j < NB_COL; j++) {
+            if (getBlocks(index, j).getColor() == Color.white) {
+                return false;
+            }
+        }
+        //System.out.println("Ligne Complète");
+        return true;
+    }
+
+    public boolean isLigneEmpty(int index) {
+        for (int j = 0; j < NB_COL; j++) {
+            if (getBlocks(index, j).getColor() != Color.white) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void moveLine(int index, int move) {
+        for (int i = 0; i < NB_COL; i++) {
+            if (move > 0 && getBlocks(index, i).getColor()!=Color.white) {
+                setBlock(index + move, i, getBlocks(index, i));
+               
+            }
+        }
+        resetLine(index);
+    }
+
+    public void resetLine(int index) {
+        Block nullBlock = new Block(Color.white);
+        for (int i = 0; i < NB_COL; i++) {
+            setBlock(index, i, nullBlock);
+        }
+        fireUpdatedGrid(getColorTab(true));
+    }
+
+    public void updateGrid(ArrayList<Integer> moves) {
+        for (int i = 0; i < moves.size(); i++) {
+            if (moves.get(i) > 0) {
+                moveLine(NB_ROW - (i + 1), moves.get(i));
+            } else {
+                if (moves.get(i) == -1) {
+                    resetLine(NB_ROW - (i + 1));
+                }
+            }
+        }
+    }
+
+    public void moveRight() {
+        TetrisPiece p = (TetrisPiece) getCurrentPiece();
+        if (p != null && canMoveRight()) {
+            p.setPosition(p.getPosition().getRightPosition());
+        }
+    }
+
+    public void moveLeft() {
+        TetrisPiece p = (TetrisPiece) getCurrentPiece();
+        if (p != null && canMoveLeft()) {
+            p.setPosition(p.getPosition().getLeftPosition());
+        }
+    }
+
+    public void moveDown() {
+        TetrisPiece p = (TetrisPiece) getCurrentPiece();
+        if (p != null && isDownable()) {
+            p.setPosition(p.getPosition().getDownPosition());
+        }
+    }
+
+    public void rotateRight() {
+        TetrisPiece p = (TetrisPiece) getCurrentPiece();
+        if (p != null && isRightRotable()) {
+            p.rotatePiece();
+        }
+    }
+
+    public void rotateLeft() {
+        TetrisPiece p = (TetrisPiece) getCurrentPiece();
+        if (p != null && isRightRotable()) {
+            p.rotatePiece();
+        }
+    }
 }

@@ -8,8 +8,8 @@ import Core.GridGame.Observers.Observable;
  * Information about the Game, this class is Observable in order to get
  * @author Antoine
  */
-public class GridGameInfo extends Observable{
-    private int _score;
+public abstract class GridGameInfo extends Observable{
+    protected int _score;
     private Piece _heldPiece;
 
     public GridGameInfo(int _score) {
@@ -32,4 +32,5 @@ public class GridGameInfo extends Observable{
     public void setHeldPiece(Piece _heldPiece) {
         this._heldPiece = _heldPiece;
     }
+    public abstract void updateScore(int nblignes);
 }

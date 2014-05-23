@@ -3,8 +3,11 @@ package Core.TetrisGame;
 import Core.GridGame.GridGameCore;
 import Core.GridGame.Utilitary;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Timer;
 
 /**
  *
@@ -13,7 +16,9 @@ import java.util.logging.Logger;
 public class TetrisCore extends GridGameCore<TetrisGrid> {
 
     public static final int NB_NEXTPIECE = 3;
-    public static final double BASIC_TEMPO = 250f;
+    public static final int BASIC_TEMPO = 250;
+  
+
 
     public TetrisGrid getGrid() {
         return grid;
@@ -60,6 +65,7 @@ public class TetrisCore extends GridGameCore<TetrisGrid> {
                 break;
             } else {
                 grid.spawnPiece();
+                
                 while (pieceFree) {
                     try {
                         Thread.currentThread().sleep((long) BASIC_TEMPO);
@@ -73,6 +79,7 @@ public class TetrisCore extends GridGameCore<TetrisGrid> {
                     }
                 }
                 this.grid.fixPiece();
+                getInfo().updateScore(grid.destroyLines());
                 this.nextPiece();
                 pieceFree = true;
             }
@@ -85,9 +92,12 @@ public class TetrisCore extends GridGameCore<TetrisGrid> {
         this.getInfo().setHeldPiece(this.getNextPieces().pop());
     }
 
+    
+    
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.initGame();
+        this.gameLoop();
     }
 
 }

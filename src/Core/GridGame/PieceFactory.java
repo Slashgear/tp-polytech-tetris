@@ -13,7 +13,7 @@ public interface PieceFactory {
      * Create the ArrayList available pieces for the game 
      * @return ArrayList<Piece> available Pieces
      */
-    public  ArrayList<Piece> createAvailablePieces();
+    public ArrayList<Piece> createAvailablePieces();
     /**
      * Generate available colors of a Game
      * @return ArrayList<Color> available Colors

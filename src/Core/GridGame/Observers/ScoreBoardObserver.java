@@ -9,4 +9,5 @@ import java.awt.Color;
  */
 public interface ScoreBoardObserver {
     public void updateNext(Color[][] tab);
+    public void updateScore(int score);
 }

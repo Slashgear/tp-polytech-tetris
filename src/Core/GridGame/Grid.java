@@ -54,6 +54,10 @@ public abstract class Grid extends Observable {
     public void setBlock(int row, int col, Block block) {
         _blocks[row][col] = block;
     }
+    
+     public void setBlock(int row, int col, Color color) {
+        _blocks[row][col] = new Block(color);
+    }
 
     /**
      * Constructor of a Grid
@@ -87,7 +91,7 @@ public abstract class Grid extends Observable {
      *
      * @return Color[][]
      */
-    public Color[][] getColorTab() {
+    synchronized public Color[][] getColorTab() {
         Color[][] tab = new Color[_blocks.length][_blocks[0].length];
         for (int i = 0; i < _blocks.length; i++) {
             for (int j = 0; j < _blocks[0].length; j++) {

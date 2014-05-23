@@ -29,45 +29,36 @@ public class TetrisPieceFactory implements PieceFactory {
         //System.out.println("Construction des Pieces Disponibles..");
 
         //System.out.println("Ajout du Z");
-        TetrisShape[] shapes = new TetrisShape[Piece.NB_SHAPE];
+        TetrisShape[] shapes = new TetrisShape[Piece.NB_SHAPE-2];
         shapes[0] = new TetrisShape(new int[][]{{0, 1, 0, 0}, {0, 1, 1, 0}, {0, 0, 1, 0}, {0, 0, 0, 0}});
         shapes[1] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 0, 1, 1}, {0, 1, 1, 0}, {0, 0, 0, 0}});
-        shapes[2] = new TetrisShape(new int[][]{{0, 1, 0, 0}, {0, 1, 1, 0}, {0, 0, 1, 0}, {0, 0, 0, 0}});
-        shapes[3] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 0, 1, 1}, {0, 1, 1, 0}, {0, 0, 0, 0}});
         possible_pieces.add(new TetrisPiece(shapes,Color.red));
         //System.out.println(Arrays.toString(shapes));
 
         //System.out.println("Ajout du Carré");
-        shapes = new TetrisShape[Piece.NB_SHAPE];
+        shapes = new TetrisShape[Piece.NB_SHAPE-3];
         shapes[0] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}});
-        shapes[1] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}});
-        shapes[2] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}});
-        shapes[3] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}});
         possible_pieces.add(new TetrisPiece(shapes,Color.yellow));
         //System.out.println(Arrays.toString(shapes));
 
         //System.out.println("Ajout de la Ligne");
-        shapes = new TetrisShape[Piece.NB_SHAPE];
+        shapes = new TetrisShape[Piece.NB_SHAPE-2];
         shapes[0] = new TetrisShape(new int[][]{{0, 1, 0, 0}, {0, 1, 0, 0}, {0, 1, 0, 0}, {0, 1, 0, 0}});
         shapes[1] = new TetrisShape(new int[][]{{1, 1, 1, 1}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}});
-        shapes[2] = new TetrisShape(new int[][]{{0, 1, 0, 0}, {0, 1, 0, 0}, {0, 1, 0, 0}, {0, 1, 0, 0}});
-        shapes[3] = new TetrisShape(new int[][]{{1, 1, 1, 1}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}});
         possible_pieces.add(new TetrisPiece(shapes,Color.cyan));
         //System.out.println(Arrays.toString(shapes));
 
         //System.out.println("Ajout du S");
-        shapes = new TetrisShape[Piece.NB_SHAPE];
+        shapes = new TetrisShape[Piece.NB_SHAPE-2];
         shapes[0] = new TetrisShape(new int[][]{{0, 0, 1, 0}, {0, 1, 1, 0}, {0, 1, 0, 0}, {0, 0, 0, 0}});
         shapes[1] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 0, 1, 1}, {0, 0, 0, 0}});
-        shapes[2] = new TetrisShape(new int[][]{{0, 0, 1, 0}, {0, 1, 1, 0}, {0, 1, 0, 0}, {0, 0, 0, 0}});
-        shapes[3] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 0, 1, 1}, {0, 0, 0, 0}});
         possible_pieces.add(new TetrisPiece(shapes,Color.green));
         //System.out.println(Arrays.toString(shapes));
 
         //System.out.println("Ajout du T");
         shapes = new TetrisShape[Piece.NB_SHAPE];
         shapes[0] = new TetrisShape(new int[][]{{0, 1, 0, 0}, {0, 1, 1, 0}, {0, 1, 0, 0}, {0, 0, 0, 0}});
-        shapes[1] = new TetrisShape(new int[][]{{0, 0, 1, 0}, {0, 1, 1, 1}, {0, 0, 1, 1}, {0, 0, 0, 0}});
+        shapes[1] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 0, 1, 0}, {0, 1, 1, 1}, {0, 0, 0, 0}});
         shapes[2] = new TetrisShape(new int[][]{{0, 0, 0, 1}, {0, 0, 1, 1}, {0, 0, 0, 1}, {0, 0, 0, 0}});
         shapes[3] = new TetrisShape(new int[][]{{0, 1, 1, 1}, {0, 0, 1, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}});
         possible_pieces.add(new TetrisPiece(shapes,Color.magenta));
@@ -94,6 +85,19 @@ public class TetrisPieceFactory implements PieceFactory {
         return possible_pieces;
     }
 
+    public ArrayList<Piece> createDebugPieces(){
+       ArrayList<Piece> possible_pieces = new ArrayList<Piece>();
+       //System.out.println("Ajout du Carré");
+        TetrisShape[] shapes = new TetrisShape[Piece.NB_SHAPE];
+        shapes[0] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}});
+        shapes[1] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}});
+        shapes[2] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}});
+        shapes[3] = new TetrisShape(new int[][]{{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}});
+        possible_pieces.add(new TetrisPiece(shapes,Color.yellow));
+        //System.out.println(Arrays.toString(shapes));
+         return possible_pieces;
+    }
+    
     @Override
     public ArrayList<Color> createAvailableColors() {
         ArrayList<Color> list_Colors = new ArrayList<Color>();

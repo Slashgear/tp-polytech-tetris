@@ -10,6 +10,13 @@ import java.awt.Color;
  */
 public class TetrisInfo extends GridGameInfo {
 
+    private static final int SCORE_FOR_1 = 40;
+    private static final int SCORE_FOR_2 = 100;
+    private static final int SCORE_FOR_3 = 300;
+    private static final int SCORE_FOR_4 = 1200;
+    private int _nb_lines;
+    private int _level;
+
     public TetrisInfo(int _score) {
         super(_score);
     }
@@ -32,4 +39,24 @@ public class TetrisInfo extends GridGameInfo {
         }
         return tab;
     }
+
+    @Override
+    public void updateScore(int nblignes) {
+        switch (nblignes) {
+            case 1:
+                _score += SCORE_FOR_1;
+                break;
+            case 2:
+                _score += SCORE_FOR_2;
+                break;
+            case 3:
+                _score += SCORE_FOR_3;
+                break;
+            case 4:
+                _score += SCORE_FOR_4;
+                break;
+        }
+        fireUpdateScore(_score);
+    }
+   
 }

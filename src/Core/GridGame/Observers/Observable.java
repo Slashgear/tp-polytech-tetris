@@ -76,7 +76,7 @@ public class Observable {
      * Fire the new Information about the Grid
      * @param tab a Color[][]
      */
-    public void fireUpdatedGrid(Color[][] tab){
+    synchronized public void fireUpdatedGrid(Color[][] tab){
         for(GridObserver o:observers){
             o.update(tab);
         }
@@ -88,6 +88,12 @@ public class Observable {
     public void fireUpdateNext(Color[][] tab){
         for(ScoreBoardObserver o:_sb_observer){
             o.updateNext(tab);
+        }
+    }
+    
+    public void fireUpdateScore(int score){
+        for(ScoreBoardObserver o:_sb_observer){
+            o.updateScore(score);
         }
     }
 }

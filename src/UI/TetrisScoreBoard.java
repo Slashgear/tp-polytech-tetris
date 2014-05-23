@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -22,6 +23,7 @@ import javax.swing.border.Border;
 public class TetrisScoreBoard extends JPanel implements ScoreBoardObserver{
 
     private JComponent _next_piece_grid;
+    private JLabel _score;
      
     public TetrisScoreBoard() {
         super();
@@ -30,6 +32,7 @@ public class TetrisScoreBoard extends JPanel implements ScoreBoardObserver{
 
     private void build() {
         _next_piece_grid=new JPanel(new GridLayout(TetrisShape.NB_ROW+2,TetrisShape.NB_COL+2));
+        _score=new JLabel();
         Border blackline = BorderFactory.createLineBorder(Color.black,1);
         
         _next_piece_grid.setBorder(blackline);
@@ -40,6 +43,8 @@ public class TetrisScoreBoard extends JPanel implements ScoreBoardObserver{
             tetrisBox.setBackground(Color.BLACK);
             _next_piece_grid.add(tetrisBox);
         }
+        this.add(new JLabel("Score :"));
+        this.add(_score);
         this.add(_next_piece_grid);
     }
 
@@ -51,5 +56,11 @@ public class TetrisScoreBoard extends JPanel implements ScoreBoardObserver{
             }
                 
         }
+    }
+
+    @Override
+    public void updateScore(int score) {
+        Integer i=score;
+        _score.setText(i.toString());
     }
 }
