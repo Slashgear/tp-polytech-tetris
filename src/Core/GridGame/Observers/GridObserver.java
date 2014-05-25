@@ -13,5 +13,8 @@ public interface GridObserver {
      * @param tab The color Tab corresponding to the Grid
      */
    public void update(Color[][] tab);
-   
+   /**
+    * On Game Over
+    */
+   //public void onGameOver();
 }
