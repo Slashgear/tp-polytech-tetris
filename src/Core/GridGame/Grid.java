@@ -16,15 +16,28 @@ public abstract class Grid extends Observable {
      * Array of Blocks
      */
     private Block[][] _blocks;
+
     /**
      * Current Piece on the Grid
      */
     private Piece _currentPiece;
 
+    /**
+     * Getter of the block at the case of indexes x,y
+     *
+     * @param x index of the row
+     * @param y index of the column
+     * @return Block at (x,y)
+     */
     public Block get(int x, int y) {
         return _blocks[x][y];
     }
 
+    /**
+     * Getter of current piece
+     *
+     * @return Piece
+     */
     public Piece getCurrentPiece() {
         return _currentPiece;
     }
@@ -54,8 +67,8 @@ public abstract class Grid extends Observable {
     public void setBlock(int row, int col, Block block) {
         _blocks[row][col] = block;
     }
-    
-     public void setBlock(int row, int col, Color color) {
+
+    public void setBlock(int row, int col, Color color) {
         _blocks[row][col] = new Block(color);
     }
 
@@ -76,7 +89,7 @@ public abstract class Grid extends Observable {
     }
 
     /**
-     * Initialse the Grid by setting all the Block at white Color
+     * Initialize the Grid by setting all the Blocks with white Color
      */
     public void initialiseGrid() {
         for (int i = 0; i < _blocks.length; i++) {
@@ -87,7 +100,7 @@ public abstract class Grid extends Observable {
     }
 
     /**
-     * Function which get the color tab corresponding to the Array of Blocks
+     * Function which gets the color tab corresponding to the Array of Blocks
      *
      * @return Color[][]
      */
@@ -110,7 +123,7 @@ public abstract class Grid extends Observable {
     public abstract boolean isDownable();
 
     public abstract boolean isLeftRotable();
-    
+
     public abstract void fixPiece();
 
     /**

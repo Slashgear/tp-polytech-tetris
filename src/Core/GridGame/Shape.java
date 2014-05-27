@@ -29,8 +29,8 @@ public abstract class Shape {
         _shape = shape;
     }
     /**
-     * toString Function for a Shape
-     * @return 
+     * toString function for a Shape
+     * @return String to display the grid like a tab
      */
     @Override
     public String toString() {

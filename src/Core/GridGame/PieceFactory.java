@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 /**
- * Factory of the Game Colors and the different Piece available
+ * Factory of the Game Colors and the different available Pieces
  * @author Adrien
  * @version 1.0
  */
