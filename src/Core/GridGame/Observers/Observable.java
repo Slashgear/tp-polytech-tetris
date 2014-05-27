@@ -99,6 +99,7 @@ public class Observable {
     public void fireGameOver(){
          for(GridObserver o:observers){
             o.onGameOver();
+            
         }
     }
     public void fireUpdatelevel(int level){

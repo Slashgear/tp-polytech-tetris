@@ -11,4 +11,5 @@ public interface ScoreBoardObserver {
     public void updateNext(Color[][] tab);
     public void updateScore(int score);
     public void updateLevel(int level);
+    
 }
