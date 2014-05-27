@@ -77,8 +77,7 @@ public abstract class Piece {
     }
 
     /**
-     * Get the shape of the piece after a left rotation (or anti-clockwise
-     * rotation)
+     * Get the shape of the piece after a left rotation (or clockwise rotation)
      *
      * @return int
      */
@@ -87,7 +86,8 @@ public abstract class Piece {
     }
 
     /**
-     * Get the shape of the piece after a right rotation (or clockwise rotation)
+     * Get the shape of the piece after a right rotation (or anti-clockwise
+     * rotation)
      *
      * @return int
      */
@@ -173,12 +173,15 @@ public abstract class Piece {
     }
 
     /**
-     * Make a 90° degree rotation of the piece, clockwise
+     * Make a 90 degree rotation of the piece, clockwise
      */
     public void rotateLeftPiece() {
         _currentRotation = getLeftRotation();
     }
 
+    /**
+     * Make a 90 degree rotation of the piece, anti-clo
+     */
     public void rotateRightPiece() {
         _currentRotation = getRightRotation();
     }

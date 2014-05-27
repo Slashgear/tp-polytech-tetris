@@ -4,20 +4,23 @@ import Core.GridGame.Observers.GridObserver;
 import Core.TetrisGame.TetrisGrid;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 /**
+ * Display the entire grid of the game
+ *
  * @author Antoine
  */
 public class Grid extends JPanel implements GridObserver {
 
+    /**
+     * Constructor of a grid
+     */
     public Grid() {
         super(new GridBagLayout());
         this.setPreferredSize(new Dimension(400, 800));
@@ -31,8 +34,8 @@ public class Grid extends JPanel implements GridObserver {
         int nb_box = (TetrisGrid.NB_COL) * TetrisGrid.NB_ROW;
         for (int i = 0; i < nb_box; i++) {
 
-            c.gridy = (int) i/TetrisGrid.NB_COL;
-            c.gridx = i%TetrisGrid.NB_COL;
+            c.gridy = (int) i / TetrisGrid.NB_COL;
+            c.gridx = i % TetrisGrid.NB_COL;
             JComponent tetrisBox = new Box();
             tetrisBox.setBorder(blackline);
             tetrisBox.setBackground(Color.BLACK);
@@ -40,6 +43,10 @@ public class Grid extends JPanel implements GridObserver {
         }
     }
 
+    /**
+     * Update the color graphically of the grid
+     * @param tab 
+     */
     @Override
     public void update(Color[][] tab) {
         for (int i = 0; i < TetrisGrid.NB_ROW; i++) {
@@ -50,6 +57,9 @@ public class Grid extends JPanel implements GridObserver {
         }
     }
 
+    /**
+     * Function that is doing nothing, Jon Snow. 
+     */
     @Override
     public void onGameOver() {
     }

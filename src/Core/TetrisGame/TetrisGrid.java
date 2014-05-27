@@ -7,29 +7,58 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 /**
+ * Grid of a Tetris game
  *
  * @author Antoine
  */
 public class TetrisGrid extends Grid {
 
+    /**
+     * Number of rows of the grid
+     */
     public static final int NB_ROW = 20;
+
+    /**
+     * Number of the lines of the grid
+     */
     public static final int NB_COL = 10;
 
+    /**
+     * Constructor of the tetris grid (NB_ROW by NB_COL)
+     */
     public TetrisGrid() {
         super(NB_ROW, NB_COL);
     }
 
+    /**
+     * Setter of a Block
+     *
+     * @param row row of the block choosen
+     * @param col column of the block choosen
+     * @param block the block seted
+     */
     @Override
     public void setBlock(int row, int col, Block block) {
         super.setBlock(row, col, block);
     }
 
+    /**
+     * Spawn a piece at the top at the grid and update the grid
+     */
     @Override
     public void spawnPiece() {
         this.getCurrentPiece().setPosition(0, 3);
         fireUpdatedGrid(getColorTab(true));
     }
 
+    /**
+     * Check that the parameter of the next position of the piece is a valid
+     * position. It means that the piece can be on that position.
+     *
+     * @param nextPosition, Position where the piece will be put
+     * @param rotation , index on the list of shapes of the piece
+     * @return True if the position is valid. False if not.
+     */
     @Override
     public boolean newPositionValide(Position nextPosition, int rotation) {
         TetrisShape shape = (TetrisShape) getCurrentPiece().getShape(rotation);
@@ -49,29 +78,58 @@ public class TetrisGrid extends Grid {
         return true;
     }
 
+    /**
+     * Check if the piece can me moved by one row down.
+     *
+     * @return True if it can be moved. False if not
+     */
     @Override
     public boolean isDownable() {
         return newPositionValide(this.getCurrentPiece().getPosition().getDownPosition(), getCurrentPiece().getCurrentRotation());
     }
 
+    /**
+     * Check if the piece can be rotated to the right
+     *
+     * @return True if it can be rotated. False if not
+     */
     @Override
     public boolean isRightRotable() {
         return newPositionValide(getCurrentPiece().getPosition(), getCurrentPiece().getRightRotation());
     }
 
+    /**
+     * Check if the piece can be rotated to the left
+     *
+     * @return True if it can be rotated. Else, false.
+     */
     @Override
     public boolean isLeftRotable() {
         return newPositionValide(getCurrentPiece().getPosition(), getCurrentPiece().getLeftRotation());
     }
 
+    /**
+     * Check if the piece can be moved to the right by one column
+     *
+     * @return True if it can be moved. Else, false.
+     */
     public boolean canMoveRight() {
         return newPositionValide(getCurrentPiece().getPosition().getRightPosition(), getCurrentPiece().getCurrentRotation());
     }
 
+    /**
+     * Chech if the piece can be moved to the left by one column
+     *
+     * @return True if it can be moved. Else, false.
+     */
     public boolean canMoveLeft() {
         return newPositionValide(getCurrentPiece().getPosition().getLeftPosition(), getCurrentPiece().getCurrentRotation());
     }
 
+    /**
+     * Method that place the shape of the piece in the Tetris grid. It sets the
+     * color of the piece in it.
+     */
     @Override
     public void fixPiece() {
         TetrisShape shape = (TetrisShape) getCurrentPiece().getShape(getCurrentPiece().getCurrentRotation());
@@ -87,6 +145,14 @@ public class TetrisGrid extends Grid {
         fireUpdatedGrid(this.getColorTab());
     }
 
+    /**
+     * Get the a matrix of colors from the grid of the game. The boolean
+     * withPiece allows (if true) to get this tab with the piece put in there.
+     *
+     * @param withPiece, true with the piece included, false with the peice if
+     * not included
+     * @return
+     */
     synchronized public Color[][] getColorTab(boolean withPiece) {
         if (!withPiece) {
             return super.getColorTab();
@@ -106,6 +172,11 @@ public class TetrisGrid extends Grid {
         }
     }
 
+    /**
+     * Destroy complete lines. Return the number of rows destroyed.
+     *
+     * @return number of rows destroyed
+     */
     public int destroyLines() {
         ArrayList<Integer> move_for_lines = new ArrayList<Integer>();
         int nb_move = 0;
@@ -129,16 +200,27 @@ public class TetrisGrid extends Grid {
         return nb_lines;
     }
 
+    /**
+     * Check if the row which index in param, is complete
+     *
+     * @param index of the row
+     * @return True if the row is full. Else false.
+     */
     public boolean isLigneComplete(int index) {
         for (int j = 0; j < NB_COL; j++) {
             if (getBlocks(index, j).getColor() == Color.white) {
                 return false;
             }
         }
-        //System.out.println("Ligne Complète");
         return true;
     }
 
+    /**
+     * Check if the row which index in param, is empty
+     *
+     * @param index of the row
+     * @return True if it is empty. Else false.
+     */
     public boolean isLigneEmpty(int index) {
         for (int j = 0; j < NB_COL; j++) {
             if (getBlocks(index, j).getColor() != Color.white) {
@@ -148,16 +230,27 @@ public class TetrisGrid extends Grid {
         return true;
     }
 
+    /**
+     * Move all the block of a row by a number of rows
+     *
+     * @param index of the row
+     * @param move, number of lines to move
+     */
     public void moveLine(int index, int move) {
         for (int i = 0; i < NB_COL; i++) {
-            if (move > 0 && getBlocks(index, i).getColor()!=Color.white) {
+            if (move > 0 && getBlocks(index, i).getColor() != Color.white) {
                 setBlock(index + move, i, getBlocks(index, i));
-               
+
             }
         }
         resetLine(index);
     }
 
+    /**
+     * Erase the color of all the block of a row
+     *
+     * @param index of the row
+     */
     public void resetLine(int index) {
         Block nullBlock = new Block(Color.white);
         for (int i = 0; i < NB_COL; i++) {
@@ -166,6 +259,11 @@ public class TetrisGrid extends Grid {
         fireUpdatedGrid(getColorTab(true));
     }
 
+    /**
+     * Update the grid by moving rows and reseting other rows
+     *
+     * @param moves list of move for each rows of the grid
+     */
     public void updateGrid(ArrayList<Integer> moves) {
         for (int i = 0; i < moves.size(); i++) {
             if (moves.get(i) > 0) {
@@ -178,6 +276,9 @@ public class TetrisGrid extends Grid {
         }
     }
 
+    /**
+     * Make the current piece to move right
+     */
     public void moveRight() {
         TetrisPiece p = (TetrisPiece) getCurrentPiece();
         if (p != null && canMoveRight()) {
@@ -185,6 +286,9 @@ public class TetrisGrid extends Grid {
         }
     }
 
+    /**
+     * Make the current piece to move left
+     */
     public void moveLeft() {
         TetrisPiece p = (TetrisPiece) getCurrentPiece();
         if (p != null && canMoveLeft()) {
@@ -192,6 +296,9 @@ public class TetrisGrid extends Grid {
         }
     }
 
+    /**
+     * Make the current piece to move down faster
+     */
     public void moveDown() {
         TetrisPiece p = (TetrisPiece) getCurrentPiece();
         if (p != null && isDownable()) {
@@ -199,17 +306,23 @@ public class TetrisGrid extends Grid {
         }
     }
 
+    /**
+     * Rotate the piece anti-clockwise
+     */
     public void rotateRight() {
         TetrisPiece p = (TetrisPiece) getCurrentPiece();
         if (p != null && isRightRotable()) {
-            p.rotatePiece();
+            p.rotateRightPiece();
         }
     }
 
+    /**
+     * Rotate the piece clockwise
+     */
     public void rotateLeft() {
         TetrisPiece p = (TetrisPiece) getCurrentPiece();
         if (p != null && isRightRotable()) {
-            p.rotatePiece();
+            p.rotateLeftPiece();
         }
     }
 }

@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package UI;
 
 import Core.GridGame.Observers.ScoreBoardObserver;
 import Core.TetrisGame.TetrisShape;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -26,24 +19,40 @@ import javax.swing.border.Border;
  */
 public class TetrisScoreBoard extends JPanel implements ScoreBoardObserver {
 
+    /**
+     * Component for the next piece
+     */
     private JComponent _next_piece_grid;
+
+    /**
+     * Component for the score
+     */
     private JLabel _score;
+
+    /**
+     * Component for the level
+     */
     private JLabel _level;
 
+    /**
+     * Constructor of the tetris score board
+     */
     public TetrisScoreBoard() {
         super();
         build();
     }
 
+    /**
+     * Build the TetrisScoreBoard
+     */
     private void build() {
         this.setLayout(new GridBagLayout());
-        setPreferredSize(new Dimension(150,0));
+        setPreferredSize(new Dimension(150, 0));
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
         c.gridheight = 1;
         c.weightx = 1;
         c.weighty = 1;
-        
 
         buildNextPieceGrid();
         c.gridx = 0;
@@ -69,6 +78,11 @@ public class TetrisScoreBoard extends JPanel implements ScoreBoardObserver {
         this.add(_level, c);
     }
 
+    /**
+     * Update the next piece field
+     *
+     * @param tab
+     */
     @Override
     public void updateNext(Color[][] tab) {
         for (int i = 0; i < TetrisShape.NB_ROW; i++) {
@@ -79,12 +93,20 @@ public class TetrisScoreBoard extends JPanel implements ScoreBoardObserver {
         }
     }
 
+    /**
+     * Update the score
+     *
+     * @param score
+     */
     @Override
     public void updateScore(int score) {
         Integer i = score;
         _score.setText(i.toString());
     }
 
+    /**
+     * Update and display the next piece
+     */
     public void buildNextPieceGrid() {
         JPanel nextPieceGrid = new JPanel(new GridBagLayout());
         //Set common constraints for each box
@@ -113,9 +135,14 @@ public class TetrisScoreBoard extends JPanel implements ScoreBoardObserver {
         _next_piece_grid = nextPieceGrid;
     }
 
+    /**
+     * Update the level
+     *
+     * @param level
+     */
     @Override
     public void updateLevel(int level) {
-        Integer i=level;
+        Integer i = level;
         _level.setText(i.toString());
     }
 }

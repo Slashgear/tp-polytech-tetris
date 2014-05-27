@@ -2,17 +2,18 @@ package Core.TetrisGame;
 
 import Core.GridGame.Piece;
 import Core.GridGame.PieceFactory;
-import Core.GridGame.Shape;
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
- *
+ * Factory of Tetris pieces
  * @author Antoine
  */
 public class TetrisPieceFactory implements PieceFactory {
 
+    /**
+     * Null constructor
+     */
     public TetrisPieceFactory() {
     }
 
@@ -85,6 +86,10 @@ public class TetrisPieceFactory implements PieceFactory {
         return possible_pieces;
     }
 
+    /**
+     * Creating some pieces for debuggin purpose.
+     * @return ArrayList of Pieces
+     */
     public ArrayList<Piece> createDebugPieces(){
        ArrayList<Piece> possible_pieces = new ArrayList<Piece>();
        //System.out.println("Ajout du Carré");
@@ -98,6 +103,10 @@ public class TetrisPieceFactory implements PieceFactory {
          return possible_pieces;
     }
     
+    /**
+     * Create all available colors for the tetris game
+     * @return ArrayList of Pieces
+     */
     @Override
     public ArrayList<Color> createAvailableColors() {
         ArrayList<Color> list_Colors = new ArrayList<Color>();
