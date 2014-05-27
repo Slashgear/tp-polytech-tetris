@@ -1,6 +1,7 @@
 package Core.GridGame;
 
 /**
+ * Class to keep the position (x,y) of an object
  *
  * @author Antoine
  */
@@ -15,14 +16,16 @@ public class Position {
      */
     private int _y;
 
+    /**
+     * Empty constuctor
+     */
     public Position() {
-
     }
 
     /**
      * Get the row index
      *
-     * @return row index
+     * @return int, row index
      */
     public int getX() {
         return _x;
@@ -40,7 +43,7 @@ public class Position {
     /**
      * Get the column index
      *
-     * @return column index
+     * @return int, column index
      */
     public int getY() {
         return _y;

@@ -1,20 +1,23 @@
 package Core.GridGame;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Stack;
 
 /**
  * Model of a 2D Grid Game
+ *
  * @author Antoine CARON
  * @version 1.0
  */
-public abstract class GridGameCore<E extends Grid> implements Runnable{
-    protected E grid;
-
+public abstract class GridGameCore<E extends Grid> implements Runnable {
 
     /**
-     * ArrayList of all the Next Piece 
+     * Grid of the game
+     */
+    protected E grid;
+
+    /**
+     * ArrayList of all the Next Pieces
      */
     private Stack<Piece> _nextPieces;
     /**
@@ -22,7 +25,6 @@ public abstract class GridGameCore<E extends Grid> implements Runnable{
      */
     private ArrayList<Piece> _availablePieces;
 
-  
     /**
      * Temporisation of the Game Loop
      */
@@ -31,51 +33,81 @@ public abstract class GridGameCore<E extends Grid> implements Runnable{
      * Information about the Game
      */
     private GridGameInfo _info;
-    
+
+    /**
+     * Getter of Grid Game Info
+     *
+     * @return GridGameInfo
+     */
     public GridGameInfo getInfo() {
         return _info;
     }
 
+    /**
+     * Sette of Grid Game Info
+     *
+     * @param _info GridGameInfo
+     */
     public void setInfo(GridGameInfo _info) {
         this._info = _info;
     }
 
+    /**
+     * Setter of available pieces
+     *
+     * @param _availablePieces ArrayList of Piece
+     */
     public void setAvailablePieces(ArrayList<Piece> _availablePieces) {
         this._availablePieces = _availablePieces;
     }
 
-
+    /**
+     * Getter of available pieces
+     *
+     * @return ArrayList of Piece
+     */
     public ArrayList<Piece> getAvailablePieces() {
         return _availablePieces;
     }
-    
 
+    /**
+     * Getter of next pieces
+     *
+     * @return Stack of Pieces
+     */
     public Stack<Piece> getNextPieces() {
         return _nextPieces;
     }
 
-    
-
+    /**
+     * Getter of the temporisation
+     *
+     * @return double
+     */
     public double getTempo() {
         return _tempo;
     }
 
-
+    /**
+     * Setter of the temporisation
+     *
+     * @param _tempo double
+     */
     public void setTempo(double _tempo) {
         this._tempo = _tempo;
     }
 
-
     /**
      * Constructor of a Grid Game
+     *
      * @param _info
-     * @param _tempo 
+     * @param _tempo
      */
-    public GridGameCore(GridGameInfo _info, double _tempo,E grid) {
-        this._info=_info;
+    public GridGameCore(GridGameInfo _info, double _tempo, E grid) {
+        this._info = _info;
         this._tempo = _tempo;
-        this._nextPieces=new Stack<Piece>();
-        this.grid= grid;
+        this._nextPieces = new Stack<Piece>();
+        this.grid = grid;
     }
 
 }
