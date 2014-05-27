@@ -25,6 +25,7 @@ public class TetrisInfo extends GridGameInfo {
     public TetrisInfo(int _score) {
         super(_score);
         this.fireUpdateScore(_score);
+        fireUpdatelevel(_level);
         _level=0;
 
     }
@@ -71,7 +72,7 @@ public class TetrisInfo extends GridGameInfo {
     public void updateLevel(){
         if(_score/LEVEL_SCALE>_level){
             _level=_score/LEVEL_SCALE;
-            //fireUpdatedLevel(_level);
+            fireUpdatelevel(_level);
         }
     }
     

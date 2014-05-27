@@ -67,7 +67,7 @@ public class TetrisCore extends GridGameCore<TetrisGrid> {
         while (true) {
             if (!isSpawnFree()) {
                 System.out.println("\n\n\n\n GAME OVER \n\n\n");
-                //this.grid.fireGameOver();
+                this.grid.fireGameOver();
                 break;
             } else {
                 grid.spawnPiece();
@@ -82,7 +82,8 @@ public class TetrisCore extends GridGameCore<TetrisGrid> {
                     try {
                         Thread.currentThread().sleep((long) getTempo());
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(TetrisCore.class.getName()).log(Level.SEVERE, null, ex);
+                         Thread.currentThread().interrupt();
+                         break;
                     }
                     pieceFree = this.grid.isDownable();
                     if (pieceFree) {
