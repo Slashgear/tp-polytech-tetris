@@ -96,4 +96,14 @@ public class Observable {
             o.updateScore(score);
         }
     }
+    public void fireGameOver(){
+         for(GridObserver o:observers){
+            o.onGameOver();
+        }
+    }
+    public void fireUpdatelevel(int level){
+        for(ScoreBoardObserver o:_sb_observer){
+            o.updateLevel(level);
+        }
+    }
 }

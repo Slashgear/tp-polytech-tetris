@@ -5,53 +5,44 @@
  */
 package UI;
 
-import Core.GridGame.Observers.GridObserver;
-import Core.TetrisGame.TetrisGrid;
+import Controleur.Controleur;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.BorderFactory;
+import java.io.File;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 /**
- * Frame which is displaying the Tetris Game
+ *
  *
  * @author Antoine
  */
 public class MainFrame extends JFrame {
 
-    private Grid _tetrisGrid;
-
-    public Grid getTetrisGrid() {
-        return _tetrisGrid;
-    }
-    private TetrisScoreBoard _scoreBoard;
-
     private TetrisMenu _menu;
+    private TetrisView[] _views;
 
-    public TetrisScoreBoard getScoreBoard() {
-        return _scoreBoard;
+    public TetrisMenu getMenu() {
+        return _menu;
     }
 
-    /**
-     * Contruct the Main Frame of the Game
-     */
+    public TetrisView[] getViews() {
+        return _views;
+    }
+
     public MainFrame() {
         super();
-        setSize(800, 600);
+        setSize(900, 1000);
+        setBackground(Color.DARK_GRAY);
         setResizable(false);
-        _scoreBoard = new TetrisScoreBoard();
         _menu = new TetrisMenu();
-        _tetrisGrid = new Grid();
-        build();
 
+        build();
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent arg0) {
@@ -65,14 +56,26 @@ public class MainFrame extends JFrame {
      * Building the Frame
      */
     public void build() {
-        setLayout(new BorderLayout(0, 0));
-
-        //SetParameters
+        setBackground(Color.DARK_GRAY);
         setTitle("Tetris The Game");
-
-        //adding the components
-        this.add(_tetrisGrid, BorderLayout.WEST);
-        this.add(_scoreBoard, BorderLayout.CENTER);
         this.add(_menu, BorderLayout.NORTH);
+    }
+
+    public void launch(int nb_joueur) {
+        JPanel pane=new JPanel(new FlowLayout());
+        _views = new TetrisView[nb_joueur];
+        for (int i = 0; i < nb_joueur; i++) {
+           _views[i]=new TetrisView();
+            pane.add(_views[i]);
+            
+        }
+        add(pane,BorderLayout.CENTER);
+        this.pack();
+    }
+    
+    public void resetScreen(){
+        for(TetrisView v:_views){
+            this.remove(v);
+        }
     }
 }

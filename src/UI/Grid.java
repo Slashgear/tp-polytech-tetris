@@ -4,10 +4,12 @@ import Core.GridGame.Observers.GridObserver;
 import Core.TetrisGame.TetrisGrid;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -46,6 +48,10 @@ public class Grid extends JPanel implements GridObserver {
             }
 
         }
+    }
+
+    @Override
+    public void onGameOver() {
     }
 
 }

@@ -9,6 +9,7 @@ import Core.GridGame.Observers.ScoreBoardObserver;
 import Core.TetrisGame.TetrisShape;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -36,13 +37,13 @@ public class TetrisScoreBoard extends JPanel implements ScoreBoardObserver {
 
     private void build() {
         this.setLayout(new GridBagLayout());
-
+        setPreferredSize(new Dimension(150,0));
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
         c.gridheight = 1;
         c.weightx = 1;
         c.weighty = 1;
-        c.insets = new Insets(10, 100, 10, 100);
+        
 
         buildNextPieceGrid();
         c.gridx = 0;
@@ -64,7 +65,7 @@ public class TetrisScoreBoard extends JPanel implements ScoreBoardObserver {
         this.add(new JLabel("Level : "), c);
         c.gridx = 0;
         c.gridy = 4;
-        _level = new JLabel("1");
+        _level = new JLabel("0");
         this.add(_level, c);
     }
 
@@ -110,5 +111,11 @@ public class TetrisScoreBoard extends JPanel implements ScoreBoardObserver {
         }
 
         _next_piece_grid = nextPieceGrid;
+    }
+
+    @Override
+    public void updateLevel(int level) {
+        Integer i=level;
+        _level.setText(i.toString());
     }
 }
